@@ -6,6 +6,7 @@ import lombok.Getter;
 
 @Entity
 @Table(name = "tb_user")
+@Getter
 public class User {
 
     @Id
