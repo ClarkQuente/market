@@ -3,10 +3,12 @@ package me.clarkquente.market.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "tb_user")
-@Getter
 public class User {
 
     @Id
@@ -18,6 +20,7 @@ public class User {
     private String username;
     private String password;
 
+    @Column(columnDefinition = "TINYINT(1)")
     private Role role;
 
     @AllArgsConstructor
