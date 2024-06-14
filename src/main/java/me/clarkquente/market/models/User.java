@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import me.clarkquente.market.converters.RoleConverter;
+
+import java.util.Arrays;
 
 @Getter
 @Setter
@@ -20,18 +23,26 @@ public class User {
     private String username;
     private String password;
 
+    @Convert(converter = RoleConverter.class)
     @Column(columnDefinition = "TINYINT(1)")
     private Role role;
 
     @AllArgsConstructor
     @Getter
-    enum Role {
+    public enum Role {
 
-        NORMAL(0),
+        USER(0),
         ADMIN(1),
         OWNER(2);
 
         private final int value;
+
+        public static Role getRole(int value) {
+            return Arrays.stream(values())
+                    .filter(role -> role.getValue() == value)
+                    .findFirst()
+                    .orElse(null);
+        }
 
     }
 }
